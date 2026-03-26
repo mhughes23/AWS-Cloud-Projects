@@ -126,33 +126,4 @@ terraform apply
 
 ---
 
-## Project Structure
-
-```
-aws-monitoring-security/
-├── terraform/
-│   ├── main.tf              # Core infrastructure
-│   ├── cloudtrail.tf        # Trail and S3 bucket config
-│   ├── cloudwatch.tf        # Log groups, filters, and alarms
-│   ├── iam.tf               # Roles and policies
-│   ├── sns.tf               # Notification topics
-│   └── variables.tf
-├── policies/
-│   ├── cloudtrail-s3.json   # S3 bucket policy for CloudTrail
-│   └── cloudwatch-role.json # IAM role for CloudWatch Logs
-├── docs/
-│   └── architecture.png
-└── README.md
-```
-
----
-
-## Key Learnings
-
-- How CloudTrail integrates with CloudWatch Logs for real-time analysis
-- Writing CloudWatch metric filter patterns to isolate security events
-- Structuring IAM roles that follow least-privilege in a monitoring context
-- Building an end-to-end alerting pipeline from log event to notification
-
----
 
