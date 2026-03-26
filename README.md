@@ -1,3 +1,16 @@
+# AWS Cloud Engineering Projects
+
+Hands-on AWS projects covering cloud infrastructure, security hardening, and monitoring automation — built to reflect real-world cloud engineering and DevOps workflows.
+
+[![AWS](https://img.shields.io/badge/AWS-EC2%20%7C%20VPC%20%7C%20IAM%20%7C%20CloudTrail%20%7C%20CloudWatch-FF9900?logo=amazonaws&logoColor=white)](https://aws.amazon.com)
+[![IaC](https://img.shields.io/badge/IaC-Terraform-7B42BC?logo=terraform&logoColor=white)](https://www.terraform.io)
+[![OS](https://img.shields.io/badge/OS-Linux%20Ubuntu-E95420?logo=ubuntu&logoColor=white)](https://ubuntu.com)
+
+---
+
+## Projects
+
+| # | Project | Focus Areas |
 |---|---------|-------------|
 | 1 | [Terraform VPC Infrastructure](#1-terraform-vpc-infrastructure) | IaC, networking, resource provisioning |
 | 2 | [EC2 Hardening & AMI Creation](#2-ec2-hardening-and-ami-creation) | Linux admin, Bash, secure configuration |
@@ -58,3 +71,12 @@ These projects document a progression through foundational cloud engineering dis
 - [ ] Refactor Terraform into reusable, parameterized modules
 - [ ] Integrate CloudWatch alerts with a SIEM (e.g., Wazuh)
 - [ ] Add a fourth project: S3 data pipeline with lifecycle policies and access logging
+
+**Skills demonstrated:** CloudTrail logging · CloudWatch metric filters & alarms · SNS alerting · IAM least-privilege · Threat simulation
+
+→ [View project](./monitoring-pipeline/)
+
+---
+
+
+
