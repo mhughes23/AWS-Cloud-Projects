@@ -68,8 +68,6 @@ These projects document a progression through foundational cloud engineering dis
 
 **Skills demonstrated:** CloudTrail logging · CloudWatch metric filters & alarms · SNS alerting · IAM least-privilege · Threat simulation
 
-→ [View project](./monitoring-pipeline/)
-
 ---
 
 
