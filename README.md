@@ -61,10 +61,10 @@ These projects document a progression through foundational cloud engineering dis
 
 ## Roadmap
 
-- [ ] Add CI/CD pipeline for automated Terraform deployments (GitHub Actions)
-- [ ] Refactor Terraform into reusable, parameterized modules
-- [ ] Integrate CloudWatch alerts with a SIEM (e.g., Wazuh)
-- [ ] Add a fourth project: S3 data pipeline with lifecycle policies and access logging
+- [x] Add CI/CD pipeline for automated Terraform deployments (GitHub Actions)
+- [x] Refactor Terraform into reusable, parameterized modules
+- [x] Integrate CloudWatch alerts with a SIEM (e.g., Wazuh)
+- [x] Add a fourth project: S3 data pipeline with lifecycle policies and access logging
 
 **Skills demonstrated:** CloudTrail logging · CloudWatch metric filters & alarms · SNS alerting · IAM least-privilege · Threat simulation
 
