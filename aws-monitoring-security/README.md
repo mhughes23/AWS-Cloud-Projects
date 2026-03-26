@@ -10,7 +10,7 @@
 
 ## Overview
 
-This project implements a fully integrated AWS security monitoring pipeline that captures API activity across an entire AWS account, filters logs for security-relevant events, and delivers real-time alerts when thresholds are breached. It mirrors the kind of security observability work done in production cloud environments — from log ingestion to automated incident notification.
+This project implements a fully integrated AWS security monitoring pipeline that captures API activity across an entire AWS account, filters logs for security-relevant events, and delivers real-time alerts when thresholds are breached. It mirrors the kind of security observability work done in production cloud environments, from log ingestion to automated incident notification.
 
 **Core capabilities:**
 - Continuous API activity logging via CloudTrail with S3 persistence
