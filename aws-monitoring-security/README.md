@@ -157,27 +157,6 @@ Simulate real security events to validate end-to-end alert delivery:
 
 ---
 
-## Project Structure
-
-```
-aws-monitoring-security/
-├── terraform/
-│   ├── main.tf              # Provider config and shared locals
-│   ├── cloudtrail.tf        # Trail definition and S3 bucket config
-│   ├── cloudwatch.tf        # Log groups, metric filters, and alarms
-│   ├── iam.tf               # Roles and least-privilege policies
-│   ├── sns.tf               # Notification topics and subscriptions
-│   └── variables.tf         # Input variable declarations
-├── policies/
-│   ├── cloudtrail-s3.json   # S3 bucket policy for CloudTrail delivery
-│   └── cloudwatch-role.json # IAM role for CloudWatch Logs
-├── docs/
-│   └── architecture.png
-└── README.md
-```
-
----
-
 ## Key Learnings
 
 - How CloudTrail integrates with CloudWatch Logs to enable real-time log analysis
