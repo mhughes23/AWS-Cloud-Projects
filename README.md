@@ -24,8 +24,6 @@ Deploys a complete AWS network environment using Terraform — from a custom VPC
 
 **Skills demonstrated:** Infrastructure as Code · AWS networking (VPC, subnets, routing) · Secure resource provisioning
 
-→ [View project](./terraform-vpc/)
-
 ---
 
 ### 2. EC2 Hardening and AMI Creation
@@ -34,8 +32,6 @@ Launches a Linux EC2 instance, applies a security hardening baseline via Bash sc
 
 **Skills demonstrated:** Linux system administration · Bash scripting · CIS-aligned hardening · AMI lifecycle management
 
-→ [View project](./ec2-hardening/)
-
 ---
 
 ### 3. AWS Monitoring and Security Pipeline
@@ -43,8 +39,6 @@ Launches a Linux EC2 instance, applies a security hardening baseline via Bash sc
 Builds an end-to-end security observability pipeline: CloudTrail captures API activity account-wide, CloudWatch metric filters parse the log stream for high-signal events, and alarms deliver real-time SNS notifications when thresholds are breached.
 
 **Skills demonstrated:** CloudTrail logging · CloudWatch metric filters & alarms · SNS alerting · IAM least-privilege · Threat simulation
-
-→ [View project](./monitoring-pipeline/)
 
 ---
 
