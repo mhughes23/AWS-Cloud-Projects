@@ -116,7 +116,3 @@ clouduser : clouduser sudo
 - `ami-available.png` — AMI status in AWS console
 - `new-instance-verified.png` — redeployed instance passing all checks
 
-## Resume Bullet
-Created hardened EC2 instances and reusable AMIs to standardize secure
-deployments; automated configuration using Bash scripting and verified
-reproducibility across multiple instances.
