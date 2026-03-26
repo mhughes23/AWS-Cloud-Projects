@@ -2,104 +2,130 @@
 
 > Centralized logging, real-time threat detection, and automated alerting on AWS — built to simulate production-grade security operations.
 
+[![AWS](https://img.shields.io/badge/AWS-CloudTrail%20%7C%20CloudWatch%20%7C%20SNS%20%7C%20IAM-FF9900?logo=amazonaws&logoColor=white)](https://aws.amazon.com)
+[![IaC](https://img.shields.io/badge/IaC-Terraform-7B42BC?logo=terraform&logoColor=white)](https://www.terraform.io)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+
 ---
 
 ## Overview
 
-This project implements a fully integrated AWS security monitoring pipeline using **CloudTrail**, **CloudWatch**, **IAM**, and **SNS**. It demonstrates how to detect suspicious activity, enforce least-privilege access, and trigger automated alerts — mirroring real-world cloud security workflows.
+This project implements a fully integrated AWS security monitoring pipeline that captures API activity across an entire AWS account, filters logs for security-relevant events, and delivers real-time alerts when thresholds are breached. It mirrors the kind of security observability work done in production cloud environments — from log ingestion to automated incident notification.
+
+**Core capabilities:**
+- Continuous API activity logging via CloudTrail with S3 persistence
+- Structured log ingestion and querying through CloudWatch Logs
+- Custom metric filters that isolate high-signal security events (failed logins, unauthorized calls, root usage, IAM changes)
+- Threshold-based alarms that trigger SNS notifications via email or SMS
+- IAM roles and policies built on strict least-privilege principles throughout
 
 ---
 
 ## Architecture
 
 ```
-AWS CloudTrail
-      │
-      ▼
-CloudWatch Logs
-      │
-      ▼
-Metric Filters  ──►  CloudWatch Alarms  ──►  SNS Notifications
+┌─────────────────────────────────────────────────────────┐
+│                      AWS Account                        │
+│                                                         │
+│   API Calls → AWS CloudTrail → S3 Bucket (log archive)  │
+│                    │                                    │
+│                    ▼                                    │
+│             CloudWatch Logs                             │
+│                    │                                    │
+│          ┌─────────┴──────────┐                         │
+│          ▼                    ▼                         │
+│   Metric Filters        Log Insights                    │
+│          │              (ad-hoc queries)                │
+│          ▼                                              │
+│   CloudWatch Alarms                                     │
+│          │                                              │
+│          ▼                                              │
+│   SNS Topic → Email / SMS / Lambda / Webhook            │
+└─────────────────────────────────────────────────────────┘
 ```
 
 ---
 
 ## Tech Stack
 
-| Service | Purpose |
+| Service | Role |
 |---|---|
-| AWS CloudTrail | API activity logging across the account |
-| AWS CloudWatch | Log ingestion, metric filters, and alarms |
-| AWS IAM | Access control and least-privilege enforcement |
-| AWS SNS | Real-time alert notifications |
+| **AWS CloudTrail** | Captures all API calls across the account; writes to S3 |
+| **AWS CloudWatch Logs** | Ingests CloudTrail logs for real-time filtering and querying |
+| **AWS CloudWatch Alarms** | Triggers on metric threshold breaches; manages state transitions |
+| **AWS IAM** | Enforces least-privilege access across all pipeline components |
+| **AWS SNS** | Delivers real-time alerts via email, SMS, or downstream integrations |
+| **Terraform** | Provisions and manages all infrastructure as code |
 
 ---
 
 ## Features
 
-### 1. CloudTrail Logging
-- Captures all API calls across the AWS account
-- Tracks user actions, resource changes, and authentication events
-- Stores logs to S3 with optional integrity validation
+### CloudTrail Logging
 
-### 2. CloudWatch Log Integration
-- Centralized, real-time log ingestion from CloudTrail
-- Log groups scoped per environment for easy querying and retention control
+CloudTrail captures every API call made in the account — management events, data events, and authentication activity — and ships them to a dedicated S3 bucket with optional log file integrity validation enabled.
 
-### 3. Metric Filters & Alerting
-Filters parse log data to detect security-relevant events and feed CloudWatch Alarms:
+### CloudWatch Log Integration
 
-| Filter | Detects |
+Logs are streamed from CloudTrail into CloudWatch Log Groups, scoped per environment. This enables real-time filtering, long-term retention policies, and ad-hoc querying via CloudWatch Log Insights.
+
+### Metric Filters & Alerting
+
+Custom metric filters parse the log stream and emit numeric metrics whenever a security-relevant event pattern is matched. These feed directly into CloudWatch Alarms.
+
+| Filter Name | Detects |
 |---|---|
 | `ConsoleLoginFailures` | Failed AWS Console sign-in attempts |
-| `UnauthorizedAPICalls` | `AccessDenied` / `UnauthorizedOperation` errors |
-| `RootAccountUsage` | Any activity by the root account |
-| `IAMPolicyChanges` | Policy creation, deletion, or attachment |
+| `UnauthorizedAPICalls` | `AccessDenied` or `UnauthorizedOperation` errors |
+| `RootAccountUsage` | Any API activity by the root account |
+| `IAMPolicyChanges` | Policy creation, deletion, or attachment events |
 
-**Example filter pattern — failed console logins:**
+**Example — failed console login filter pattern:**
 ```json
 { ($.eventName = "ConsoleLogin") && ($.errorMessage = "Failed authentication") }
 ```
 
-### 4. CloudWatch Alarms
-- Alarm triggers when metric threshold is breached (e.g., ≥3 failed logins in 5 minutes)
-- Alarms transition through `OK → ALARM → INSUFFICIENT_DATA` states
-- Each alarm is linked to an SNS topic for downstream notification
+### CloudWatch Alarms
 
-### 5. SNS Notifications
-- Alerts delivered via email and/or SMS on alarm state change
-- Easily extensible to Lambda, Slack webhooks, or PagerDuty integrations
+Each metric filter feeds an alarm with a configurable threshold and evaluation period. Alarms cycle through `OK → ALARM → INSUFFICIENT_DATA` states and publish to an SNS topic on each transition.
+
+**Example:** `ConsoleLoginFailures` alarm triggers after ≥ 3 failures within any 5-minute window.
+
+### SNS Notifications
+
+Alerts are delivered to subscribed endpoints (email, SMS) when an alarm fires. The SNS topic can be extended to trigger Lambda functions, Slack webhooks, or PagerDuty without changing the upstream pipeline.
 
 ---
 
 ## IAM Configuration
 
-Follows **least-privilege** principles:
+All roles and policies are built on **least-privilege** principles — no wildcard (`*`) actions in any custom policy:
 
-- CloudTrail write-only access to the designated S3 bucket
-- CloudWatch Logs role scoped to specific log groups
-- SNS publish permissions restricted to the alarm execution role
-- No wildcard (`*`) actions in any custom policy
+- CloudTrail has write-only access scoped to the designated S3 bucket
+- CloudWatch Logs role is scoped to specific log groups
+- SNS publish permissions are restricted to the alarm execution role only
+- No cross-service permissions are granted beyond what each component requires
 
 ---
 
 ## Setup & Deployment
 
 ### Prerequisites
-- AWS CLI configured with appropriate credentials
-- Terraform v1.3+ (or AWS Console access)
-- An existing SNS topic or email subscription endpoint
 
-### Steps
+- AWS CLI configured with credentials for the target account
+- Terraform v1.3+
+- An SNS-compatible email address or phone number for alert subscriptions
+
+### Deploy
 
 ```bash
 # 1. Clone the repository
 git clone https://github.com/your-username/aws-monitoring-security.git
 cd aws-monitoring-security
 
-# 2. Configure variables
+# 2. Set your variables
 cp terraform.tfvars.example terraform.tfvars
-# Edit terraform.tfvars with your AWS region, SNS email, etc.
+# Edit terraform.tfvars: set your AWS region, SNS email, S3 bucket name, etc.
 
 # 3. Deploy infrastructure
 terraform init
@@ -107,23 +133,62 @@ terraform plan
 terraform apply
 ```
 
-### Verify Setup
-1. Navigate to **CloudTrail** → confirm trail is active and logging to S3
-2. Navigate to **CloudWatch Logs** → confirm log group is receiving events
-3. Navigate to **CloudWatch Alarms** → confirm alarms are in `OK` state
-4. Trigger a test alert by simulating a failed login or unauthorized API call
+### Verify the Pipeline
+
+After deployment, confirm each layer is healthy before testing alerts:
+
+1. **CloudTrail** → Confirm the trail is active and writing to S3
+2. **CloudWatch Logs** → Confirm the log group is receiving events
+3. **CloudWatch Alarms** → Confirm all alarms are in `OK` state
+4. **SNS** → Confirm your email subscription is confirmed (check inbox)
 
 ---
 
 ## Testing Scenarios
 
+Simulate real security events to validate end-to-end alert delivery:
+
 | Scenario | How to Simulate | Expected Result |
 |---|---|---|
-| Failed login | Attempt console login with wrong password | `ConsoleLoginFailures` alarm triggers |
-| Unauthorized API | Call an API without required permissions | `UnauthorizedAPICalls` alarm triggers |
-| Root account use | Sign in as root | `RootAccountUsage` alarm triggers |
-| IAM policy change | Attach/detach a policy via CLI | `IAMPolicyChanges` alarm triggers |
+| Failed console login | Attempt login with a wrong password | `ConsoleLoginFailures` alarm triggers |
+| Unauthorized API call | Call an API without required IAM permissions | `UnauthorizedAPICalls` alarm triggers |
+| Root account use | Sign in as the root user | `RootAccountUsage` alarm triggers |
+| IAM policy change | Attach or detach a policy via AWS CLI | `IAMPolicyChanges` alarm triggers |
 
 ---
+
+## Project Structure
+
+```
+aws-monitoring-security/
+├── terraform/
+│   ├── main.tf              # Provider config and shared locals
+│   ├── cloudtrail.tf        # Trail definition and S3 bucket config
+│   ├── cloudwatch.tf        # Log groups, metric filters, and alarms
+│   ├── iam.tf               # Roles and least-privilege policies
+│   ├── sns.tf               # Notification topics and subscriptions
+│   └── variables.tf         # Input variable declarations
+├── policies/
+│   ├── cloudtrail-s3.json   # S3 bucket policy for CloudTrail delivery
+│   └── cloudwatch-role.json # IAM role for CloudWatch Logs
+├── docs/
+│   └── architecture.png
+└── README.md
+```
+
+---
+
+## Key Learnings
+
+- How CloudTrail integrates with CloudWatch Logs to enable real-time log analysis
+- Writing CloudWatch metric filter patterns to isolate high-signal security events from noisy log streams
+- Structuring IAM roles that enforce least-privilege across a multi-service pipeline
+- Building an end-to-end alerting workflow from raw log event through to notification delivery
+
+---
+
+## License
+
+MIT — see [LICENSE](./LICENSE) for details.
 
 
