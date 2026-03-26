@@ -50,9 +50,9 @@ This project implements a fully integrated AWS security monitoring pipeline that
 
 | Service | Role |
 |---|---|
-| **AWS CloudTrail** | Captures all API calls across the account; writes to S3 |
+| **AWS CloudTrail** | Captures all API calls across the account and writes to S3 |
 | **AWS CloudWatch Logs** | Ingests CloudTrail logs for real-time filtering and querying |
-| **AWS CloudWatch Alarms** | Triggers on metric threshold breaches; manages state transitions |
+| **AWS CloudWatch Alarms** | Triggers on metric threshold breaches and manages state transitions |
 | **AWS IAM** | Enforces least-privilege access across all pipeline components |
 | **AWS SNS** | Delivers real-time alerts via email, SMS, or downstream integrations |
 | **Terraform** | Provisions and manages all infrastructure as code |
@@ -63,7 +63,7 @@ This project implements a fully integrated AWS security monitoring pipeline that
 
 ### CloudTrail Logging
 
-CloudTrail captures every API call made in the account — management events, data events, and authentication activity — and ships them to a dedicated S3 bucket with optional log file integrity validation enabled.
+CloudTrail captures every API call made in the account — management events, data events, and authentication activity and ships them to a dedicated S3 bucket with optional log file integrity validation enabled.
 
 ### CloudWatch Log Integration
 
