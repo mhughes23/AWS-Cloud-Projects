@@ -166,4 +166,30 @@ Simulate real security events to validate end-to-end alert delivery:
 
 ---
 
+## Screenshots
+
+### CloudTrail Logging
+-Recorded API activity including EC2 start/stop events and console logins.
+
+### CloudWatch Log Groups
+- Centralized log storage where CloudTrail logs are ingested.
+
+### Metric Filter Configuration
+- Custom metric filter detecting failed AWS console login attempts.
+
+### CloudWatch Alarm
+- Alarm configured to trigger on detection of suspicious activity.
+
+### Alarm Triggered State
+- Alert activation after simulated suspicious activity.
+
+### Failed Login Detection
+- CloudTrail log capturing failed console login attempts.
+
+### EC2 Activity Detection
+- Logs capturing EC2 instance start/stop actions.
+
+### High CPU Simulation
+-CPU stress test used to trigger CloudWatch alarms.
+
 
