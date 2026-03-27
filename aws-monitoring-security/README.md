@@ -169,7 +169,7 @@ Simulate real security events to validate end-to-end alert delivery:
 ## Screenshots
 
 ### CloudTrail Logging
--Recorded API activity including EC2 start/stop events and console logins.
+- Recorded API activity including EC2 start/stop events and console logins.
 
 ### CloudWatch Log Groups
 - Centralized log storage where CloudTrail logs are ingested.
@@ -190,6 +190,6 @@ Simulate real security events to validate end-to-end alert delivery:
 - Logs capturing EC2 instance start/stop actions.
 
 ### High CPU Simulation
--CPU stress test used to trigger CloudWatch alarms.
+- CPU stress test used to trigger CloudWatch alarms.
 
 
