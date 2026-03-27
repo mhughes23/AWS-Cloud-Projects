@@ -44,6 +44,8 @@ terraform destroy
 
 ## Screenshots
 - terraform-apply.png — successful deployment output
+- ec2-running.png — instance running inside VPC
 <img width="1710" height="1112" alt="Screenshot 2026-03-24 at 11 41 55 PM" src="https://github.com/user-attachments/assets/aa70dfb9-b531-4faa-b42e-03caf3a5e60b" />
 - aws-vpc.png — VPC visible in AWS console
-- ec2-running.png — instance running inside VPC
+<img width="1710" height="1112" alt="Screenshot 2026-03-27 at 9 56 01 AM" src="https://github.com/user-attachments/assets/8250e983-96ae-4cf2-8825-9dfc76eea63c" />
+
