@@ -115,4 +115,5 @@ clouduser : clouduser sudo
 - `sshd-hardening.png` — SSH config verified
 - `ami-available.png` — AMI status in AWS console
 - `new-instance-verified.png` — redeployed instance passing all checks
+<img width="1710" height="1112" alt="Screenshot 2026-03-27 at 9 24 23 PM" src="https://github.com/user-attachments/assets/b5098931-e121-479c-b477-e4940a9f8d5a" />
 
