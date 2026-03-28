@@ -113,10 +113,12 @@ clouduser : clouduser sudo
 ## Screenshots
 - `ufw-status.png` — firewall active and configured
 <img width="1710" height="1112" alt="Screenshot 2026-03-28 at 2 25 14 PM" src="https://github.com/user-attachments/assets/71d11c6d-24e2-469e-b548-359a45237538" />
+
 - `sshd-hardening.png` — SSH config verified
-  <img width="1710" height="1112" alt="Screenshot 2026-03-28 at 2 24 07 PM" src="https://github.com/user-attachments/assets/f2be6927-80e6-4d8e-b6ab-e9cf4f1289ea" />
+<img width="1710" height="1112" alt="Screenshot 2026-03-28 at 2 24 07 PM" src="https://github.com/user-attachments/assets/f2be6927-80e6-4d8e-b6ab-e9cf4f1289ea" />
+
 - `ami-available.png` — AMI status in AWS console
 <img width="1710" height="1112" alt="Screenshot 2026-03-27 at 4 33 32 PM" src="https://github.com/user-attachments/assets/140ba8aa-9f1c-4e82-9036-c0cf638df016" />
+
 - `new-instance-verified.png` — redeployed instance passing all checks
 <img width="1710" height="1112" alt="Screenshot 2026-03-27 at 9 24 23 PM" src="https://github.com/user-attachments/assets/b5098931-e121-479c-b477-e4940a9f8d5a" />
-
