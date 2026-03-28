@@ -114,6 +114,8 @@ clouduser : clouduser sudo
 - `ufw-status.png` — firewall active and configured
 - `sshd-hardening.png` — SSH config verified
 - `ami-available.png` — AMI status in AWS console
+<img width="1710" height="1112" alt="Screenshot 2026-03-27 at 4 33 32 PM" src="https://github.com/user-attachments/assets/140ba8aa-9f1c-4e82-9036-c0cf638df016" />
+
 - `new-instance-verified.png` — redeployed instance passing all checks
 <img width="1710" height="1112" alt="Screenshot 2026-03-27 at 9 24 23 PM" src="https://github.com/user-attachments/assets/b5098931-e121-479c-b477-e4940a9f8d5a" />
 
