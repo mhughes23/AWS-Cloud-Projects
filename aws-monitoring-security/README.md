@@ -170,26 +170,35 @@ Simulate real security events to validate end-to-end alert delivery:
 
 ### CloudTrail Logging
 - Recorded API activity including EC2 start/stop events and console logins.
+<img width="1710" height="1112" alt="Screenshot 2026-03-28 at 1 27 33 PM" src="https://github.com/user-attachments/assets/fba8e207-010c-402c-8931-f08f55a1f4a7" />
 
 ### CloudWatch Log Groups
 - Centralized log storage where CloudTrail logs are ingested.
+<img width="1710" height="1112" alt="Screenshot 2026-03-27 at 9 12 24 PM" src="https://github.com/user-attachments/assets/34374c98-c060-4bbf-a987-5481728255d1" />
 
 ### Metric Filter Configuration
 - Custom metric filter detecting failed AWS console login attempts.
+<img width="1710" height="1112" alt="Screenshot 2026-03-28 at 1 11 24 PM" src="https://github.com/user-attachments/assets/3032b972-0957-42d9-9f29-2bfc5abf7871" />
 
 ### CloudWatch Alarm
 - Alarm configured to trigger on detection of suspicious activity.
+<img width="1710" height="1112" alt="Screenshot 2026-03-28 at 1 14 57 PM" src="https://github.com/user-attachments/assets/8521ad7f-e06e-4b6c-a51d-51c5a2fd2654" />
 
 ### Alarm Triggered State
 - Alert activation after simulated suspicious activity.
+<img width="1710" height="1112" alt="Screenshot 2026-03-26 at 12 43 32 AM" src="https://github.com/user-attachments/assets/8a7cccf9-1424-4beb-bbc6-333ed67dde73" />
 
 ### Failed Login Detection
 - CloudTrail log capturing failed console login attempts.
+<img width="1290" height="2796" alt="IMG_9040" src="https://github.com/user-attachments/assets/2ae92c48-1d51-4725-8d6c-1bf2212966a1" />
 
 ### EC2 Activity Detection
 - Logs capturing EC2 instance start/stop actions.
+<img width="1710" height="1112" alt="Screenshot 2026-03-28 at 1 27 33 PM" src="https://github.com/user-attachments/assets/293be3fd-b065-490a-8ccd-8d4965d5a642" />
+
 
 ### High CPU Simulation
 - CPU stress test used to trigger CloudWatch alarms.
-
+<img width="1710" height="1112" alt="Screenshot 2026-03-26 at 12 43 32 AM" src="https://github.com/user-attachments/assets/e9d04e52-08b6-49d8-99e0-999758948820" />
+<img width="1290" height="2796" alt="IMG_9038" src="https://github.com/user-attachments/assets/91e75b6c-18ab-4bc8-a565-edb6045c7cdb" />
 
